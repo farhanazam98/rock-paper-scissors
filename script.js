@@ -7,19 +7,20 @@ function getComputerChoice() {
 }
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
     winner = chooseWinner(playerSelection, computerSelection)
     switch(winner) {
         case("player"):
-            return "You win! " + playerSelection + " beats" + computerSelection;
+            return "You win! " + playerSelection + " beats " + computerSelection;
         case("computer"):
-            return "You lose! " + computerSelection + " beats" + playerSelection;
+            return "You lose! " + computerSelection + " beats " + playerSelection;
         case("draw"):
             return "Draw! You both chose " + computerSelection;
     }
 }
 
 function chooseWinner(playerSelection, computerSelection){
+    playerSelection = playerSelection.toLowerCase();
+
     const p = "player"
     const c = "computer"
     const d = "draw"
@@ -56,3 +57,27 @@ function chooseWinner(playerSelection, computerSelection){
     }
     return "Invalid Input"
 }
+
+function game(){
+
+    let playerScore = 0;
+    let computerScore = 0;
+    for (let i = 0; i < 5; i++) {
+        const playerSelection = prompt();
+        const computerSelection = getComputerChoice();
+        console.log(playRound(playerSelection, computerSelection));
+        winner = chooseWinner(playerSelection, computerSelection);
+        if (winner === "player") playerScore += 1;
+        if (winner === "computer") computerScore += 1;
+    }
+
+    if (playerScore > 2){
+        console.log("You win! Congradulations");
+    } else if (playerScore == computerScore){
+        console.log("It was a draw!");
+    } else {
+        console.log("You lost! Better luck next time");
+    }
+}
+
+game()
